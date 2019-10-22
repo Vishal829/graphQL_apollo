@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const graphqlHTTP = require('express-graphql');
 const schema = require('./schema');
+const path = require('path');
 
 const app = express(); // initialize express.
 
@@ -15,6 +16,12 @@ app.use(
     graphiql: true, // It allows to use GraphiQL tool to manually issue GraphQL queries. If you navigate in a web browser to http://localhost:4000/graphql, you should see an interface that lets you enter queries
   }),
 );
+
+app.use(express.static('./client/public'));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, './client/public', 'index.html'));
+});
 
 const PORT = process.env.PORT || 5000 // whatever is in the environment variable PORT, or 3000 if there's nothing there.
 
