@@ -10,8 +10,9 @@ import Launch from './components/launch';
 import './App.css';
 import logo from './logo.jpg'
 
+// Initialize apollo client and add proxy for uri
 const client = new ApolloClient({
-  uri: 'http://localhost:5000/graphql'
+  uri: '/graphql'
 });
 
 function App() {
